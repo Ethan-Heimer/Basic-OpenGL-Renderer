@@ -17,7 +17,14 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_executable(${NAME}
     main.cpp
     src/glad.cpp
-    src/application.cpp
+    src/app.cpp
+    src/window.cpp
+    src/errors.cpp
+    src/jsonloader.cpp
+    src/shader.cpp
+    src/object.cpp
+    src/renderer.cpp
+    src/input.cpp
 )
 
 
