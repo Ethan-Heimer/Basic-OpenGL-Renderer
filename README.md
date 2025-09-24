@@ -26,4 +26,4 @@ Each Object the contains the following data:
 
 ## Shaders
 You can program and use your own shaders. Shaders must be placed into the `shaders/` directory.
-The renderer defines the `frame` uniform for shaders to use, which is simply a float of the count of frames that have been rendered.
+The renderer defines the `frame` uniform for shaders to use, which is simply a `float` that holds the current frame count.
