@@ -25,6 +25,7 @@ add_executable(${NAME}
     src/object.cpp
     src/renderer.cpp
     src/input.cpp
+    src/texture.cpp
 )
 
 

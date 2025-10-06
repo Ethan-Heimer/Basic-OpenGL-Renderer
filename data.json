@@ -2,20 +2,22 @@
   "objects" : [
     { 
         "vertex" : "standard_vertex.glsl",
-        "fragment" : "pulse_fragment.glsl",
+        "fragment" : "texture_fragment.glsl",
 
-        "verts": [0.25, 0.25, 0.0, 
-                  -0.25, 0.0, 0.0, 
-                  0.25, 0.0, 0.0,
-                  -0.25, 0.25, 0.0],
+        "verts": [0.5, 0.5, 0.0, 
+                  0.5, -0.5, 0.0, 
+                  -0.5, -0.5, 0.0,
+                  -0.5, 0.5, 0.0],
 
         "indicies" : [0, 1, 2,
-                      1, 0, 3],
+                      0, 2, 3],
 
         "colors" : [1.0, 0.0, 0.0, 
                     0.0, 1.0, 0.0, 
                     0.0, 0.0, 1.0,
-                    0.75, 0.0, 0.25]
+                    0.75, 0.0, 0.25],
+
+        "texture" : "../dog3.jpg"
     },
     { 
         "vertex" : "float_vertex.glsl",
@@ -30,5 +32,35 @@
         "colors" : [1.0, 0.0, 0.0, 
                     1.0, 0.0, 0.0, 
                     1.0, 0.0, 0.0]
+    },
+    { 
+        "vertex" : "standard_vertex.glsl",
+        "fragment" : "standard_fragment.glsl",
+
+        "verts": [-1, 1, 0.0, 
+                  0.0, 0.5, 0.0,
+                  1.0, 0.25, 0.0],
+
+        "indicies" : [0, 1, 2],
+
+        "colors" : [0.25, 0.0, 0.0, 
+                    0.0, 0.75, 0.25, 
+                    1.0, 0.0, 0.5]
+    },
+    { 
+        "vertex" : "standard_vertex.glsl",
+        "fragment" : "texture_fragment.glsl",
+
+        "verts": [-0.65, -0.65, 0.0, 
+                  -0.65, -0.45, 0.0,
+                  0, -0.45, 0.0,
+                  -0.65, 0.0, 0.0],
+
+        "indicies" : [0, 1, 2,
+                      1, 2, 3],
+
+        "colors" : [0.25, 0.0, 0.0, 
+                    0.5, 0.75, 0.25, 
+                    1.0, 0.0, 0.5]
     }]
 }

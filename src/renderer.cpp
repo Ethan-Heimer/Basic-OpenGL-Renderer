@@ -1,5 +1,6 @@
 #include "Renderer/Renderer.h"
 #include "Application.hpp"
+#include "Texture/Texture.h"
 
 int Renderer::frame{};
 
@@ -18,6 +19,9 @@ Application::ErrorCode Renderer::DisplayObject(Object *object){
 
         Material* material = object->GetMaterial();
         material->Use();
+
+        Texture* texture = object->GetTexture();
+        texture->Use();
 
         material->SetFloat("frame", frame);
 

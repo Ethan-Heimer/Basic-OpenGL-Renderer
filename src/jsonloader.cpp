@@ -1,9 +1,11 @@
 #include "Application.hpp"
 #include "Assets/JSONLoading.h"
 
+#include <iostream>
 #include <sstream>
 #include <fstream>
 
+#include "Texture/Texture.h"
 #include "nlohmann/json.hpp"
 #include "nlohmann/json_fwd.hpp"
 
@@ -25,13 +27,33 @@ Application::ErrorCode Assets::JsonLoader::LoadObjects(std::string path){
         std::vector<float> colors = object["colors"];
         std::vector<unsigned int> indicies = object["indicies"];
 
-        Object* obj = new Object(verticies, indicies, colors);
+        std::vector<float> textureCords = {
+            0.0f, 0.0f, 
+            0.0f, 1.0f,
+            1.0f, 1.0f,
+            1.0f, 0.0f
+        };
+
+        Object* obj = new Object(verticies, indicies, colors, textureCords);
 
         std::string fragmentShader = object["fragment"];
         std::string vertexShader = object["vertex"];
 
         Material* material = new Material(vertexShader, fragmentShader);
         obj->SetMaterial(material);
+
+        Texture* texture;
+        try{
+            std::string textureImage = object["texture"];
+            texture = new Texture(textureImage);
+
+        }
+        catch(...){
+            std::cout << "Using Default Texture" << std::endl;
+            texture = new Texture("../dog.jpg");
+        }
+
+        obj->SetTexture(texture);
     }
 
     return Application::Errors::SUCCSESS;

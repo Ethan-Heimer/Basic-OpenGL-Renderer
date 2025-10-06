@@ -1,5 +1,6 @@
 #include "Shaders/shaders.h"
 
+#include "Texture/Texture.h"
 #include "glad/glad.h"
 #include <vector>
 
@@ -17,7 +18,8 @@ void Object::DestroyAll(){
 
 Object::Object(std::vector<float> verticies,
                std::vector<unsigned int> indicies,
-               std::vector<float> colors){          
+               std::vector<float> colors,
+               std::vector<float> textureCords){          
 
     objects.push_back(this);
 
@@ -27,11 +29,17 @@ Object::Object(std::vector<float> verticies,
     std::vector<float> data;
 
     for(int i = 0; i < length; i++){
+        //vertex
         for(int v = 0; v < 3; v++)
             data.push_back(verticies[(i * 3) + v]);
 
+        //color
         for(int c = 0; c < 3; c++)
             data.push_back(colors[(i * 3) + c]);
+
+        //texture
+        for(int t = 0; t < 2; t++)
+            data.push_back(textureCords[(i * 2) + t]);
     }
 
     glGenVertexArrays(1, &VAO);
@@ -48,12 +56,16 @@ Object::Object(std::vector<float> verticies,
     //buffer hinting
     //vertex hinting
     //(location, vec*, type, ..., stride, offest)
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
     //color hinting
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
+
+    //texture cords
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+    glEnableVertexAttribArray(2);
 }
 
 Object::~Object(){
@@ -70,6 +82,14 @@ Material* Object::GetMaterial() const {
 
 void Object::SetMaterial(Material* material){
     this->material = material;
+}
+
+Texture* Object::GetTexture() const {
+    return texture;
+}
+
+void Object::SetTexture(Texture* texture){
+    this->texture = texture;
 }
 
 int Object::GetIndiciesCount() const {

@@ -2,6 +2,7 @@
 #define OBJECT_H
 
 #include "Shaders/shaders.h"
+#include "Texture/Texture.h"
 #include "glad/glad.h"
 #include <vector>
 
@@ -12,13 +13,19 @@ class Object{
 
         Object(std::vector<float> verticies,
                std::vector<unsigned int> indicies,
-               std::vector<float> colors); 
+               std::vector<float> colors,
+               std::vector<float> textureCords); 
 
         ~Object();
 
         unsigned int GetVAO()const; 
+
         Material* GetMaterial()const; 
         void SetMaterial(Material* material);
+
+        Texture* GetTexture()const;
+        void SetTexture(Texture* texture);
+
         int GetIndiciesCount() const; 
         void Destroy();
 
@@ -30,6 +37,8 @@ class Object{
         unsigned int EBO;
 
         Material* material;
+        Texture* texture;
+
         unsigned int indiciesCount;
 };
 
